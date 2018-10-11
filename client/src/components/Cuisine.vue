@@ -1,0 +1,415 @@
+<template>
+  <v-layout column>
+    <v-flex xs6 offset-xs3>
+      <panel title="Cuisines">
+        <div v-for="cuisine in cuisines" :key="cuisine.title">
+        <h4>{{cuisine.name}}</h4>
+        {{cuisine.meal_type}}
+        {{cuisine.cuisine_type}}
+        {{cuisine.cost}}
+        </div>
+      </panel>
+    </v-flex>
+  </v-layout>
+</template>
+
+<script>
+import Panel from '@/components/Panel'
+import CuisineService from '@/services/CuisineService'
+export default {
+  components: {
+    Panel
+  },
+  data () {
+    return {
+      // songs: null
+      cuisines: [
+      {name:'American Chinese cuisine', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Biscuit (and Biscuits and gravy)', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Bread', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Ammonia cookie', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Cuisine of Antebellum America', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Apple butter', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Apple sauce', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Baked potato', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Barbecue', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Bear claw', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Beef Manhattan', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Blue cheese dressing', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Blue-plate special', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Bookbinder soup', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Breakfast burrito', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Brunswick stew', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Buffalo burger', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Buffalo wing', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Bull roast', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Burnt ends', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Butter cookie', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Cajun cuisine', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Calf\'s liver and bacon', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Carne pizzaiola', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Carolina style', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Celery Victor', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Cheese dog', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Cheese fries', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Cheesesteak', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chicago-style pizza', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chicken à la King', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chicken and waffles', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chicken Divan', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chicken fingers', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chicken French', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chicken fried bacon', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chicken fried steak', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chicken nugget', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chicken parmigiana', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chicken sandwich', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chili con carne', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chili dog', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chimichanga', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chips and dip', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Dark chocolate', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Milk chocolate', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'White chocolate', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chocolate chip cookies', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Choco pie', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Chowder', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'City chicken', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Clam cake', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Clam chowder', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Coleslaw', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Cordon bleu', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Corn chowder', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Corn dog', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Corn flakes', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Corn relish', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Corned beef', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Cornish game hen', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Cowboy beans', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Crab cake', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Creamed corn', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Creamed eggs on toast', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Deviled crab', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Deviled egg', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Domesticated turkey', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Doughnut', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Drunken chicken', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Eggo', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Eggs Benedict', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Eggs Neptune', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Energy bar', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Engastration', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Fajita', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Fortune cookie', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'French dip', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Fried chicken', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Fried fish', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Fry sauce', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Frybread', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Garden salad', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'German chocolate cake', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Goulash', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Greek-American cuisine', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Green bean casserole', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Grits', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Hamburger', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Hangtown fry', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Haystack', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Hog fry', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Home fries', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Hot chicken', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Hot chicken sandwich', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Ice cream cake', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Italian-American cuisine', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Italian beef', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Italian dressing', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Jell-O', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Jerky', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Juba', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Liver and onions', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Lobster Newberg', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Lobster roll', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'London broil', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Lorna Doone', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Macaroni and cheese', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Macaroni salad', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Maple bacon donut', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Maraca pie', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Mashed potato', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Mashed pumpkin', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Meatcake', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Meatloaf', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Milk toast', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Milkshake', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Mission burrito', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Mozzarella sticks', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Muffuletta', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Mulligan stew', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Onion ring', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Oreo', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Oysters Rockefeller', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pancakes', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pasta salad', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pastrami', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Patty', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Peanut butter', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pemmican', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pepperoni', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pickled cucumber', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pigs in blankets', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pizza strips', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Ploye', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pop-Tarts', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Popcorn', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Popover', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Poppyseed muffin', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pork and beans', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Potato salad', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Potato skins', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Potato wedges', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Potatoes O\'Brien', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Protein bar', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pulled pork', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Pumpkin pie', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Rabbit pie', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Ranch dressing', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Reuben sandwich', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Ribs', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Rolled oyster', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Russian dressing', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Russian tea cake', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Salisbury steak', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Sandwich', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Sausage gravy', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Scampi', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Scrapple', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Seafood cocktail', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Senate bean soup', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Slinger', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Sloppy joe', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Smelt', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Sonofabitch stew', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Soul food', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Sour cream', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Squab', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Steak', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Steak sandwich', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Steak sauce', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Steamed clams', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Stuffed ham', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Stuffed peppers', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Stuffed zucchini', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Succotash', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Surf and turf', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Swiss steak', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Tetrazzini', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Cuisine of the Thirteen Colonies', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Thousand Island dressing', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Toaster Strudel', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Tomato compote', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Tuna casserole', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Turducken', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Thanksgiving turkey', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Vichyssoise', meal_type:'breakfast', cusine_type:'american', cost:5.99},
+
+{name:'Waffle', meal_type:'breakfast', cusine_type:'american', cost:5.99}
+
+
+      ]
+      }
+    },
+    async mounted () {
+      // request to backend for all cusinines
+      this.cuisine = (await CuisineService.index()).data
+    }
+}
+</script>
+
+<style scoped>
+</style>

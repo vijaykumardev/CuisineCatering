@@ -1,1 +1,1 @@
-# CuisineCatering
+# Cuisine Catering Web application
