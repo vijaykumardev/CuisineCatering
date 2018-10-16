@@ -4,6 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     meal_type: DataTypes.STRING,
     cusine_type: DataTypes.STRING,
     cost: DataTypes.FLOAT
+  }, {
+    timestamps: false
   })
 
   return Cuisine

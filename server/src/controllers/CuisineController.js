@@ -2,9 +2,33 @@ const { Cuisine } = require('../models')
 module.exports = {
   async index (req, res) {
     try {
-      const cuisine = await Cuisine.findAll(
-        limit: 10
-      )
+      let cuisine = null
+      const search = req.query.search
+      if (search) {
+        cuisine = await Cuisine.findAll({
+          where: {
+            $or: [
+              'name', 'cusine_type', 'meal_type'
+            ].map(key => ({
+              [key]: {
+                $like: `%${search}%`
+              }
+            }))
+          }
+        })
+      } else {
+        cuisine = await Cuisine.findAll()
+      }
+      res.send(cuisine)
+    } catch (err) {
+      res.status(500).send({
+        error: 'an error has occured trying to fetch the cuisine'
+      })
+    }
+  },
+  async show (req, res) {
+    try {
+      const cuisine = await Cuisine.findById(req.params.cuisineId)
       res.send(cuisine)
     } catch (err) {
       res.status(500).send({
@@ -19,6 +43,20 @@ module.exports = {
     } catch (err) {
       res.status(500).send({
         error: 'an error has occured trying to create the cuisine'
+      })
+    }
+  },
+  async put (req, res) {
+    try {
+      await Cuisine.update(req.body, {
+        where: {
+          id: req.params.cuisineId
+        }
+      })
+      res.send(req.body)
+    } catch (err) {
+      res.status(500).send({
+        error: 'an error has occured trying to update the cuisine'
       })
     }
   }

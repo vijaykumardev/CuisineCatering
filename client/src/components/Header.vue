@@ -7,7 +7,7 @@
       </v-toolbar-title>
 
       <v-toolbar-items>
-      <v-btn @click="navigateTo({name: 'cuisine'})" flat dark>
+      <v-btn @click="navigateTo({name: 'cuisines'})" flat dark>
         Browse
       </v-btn>
       </v-toolbar-items>
@@ -23,6 +23,17 @@
         <v-btn v-if="!$store.state.isUserLoggedIn" @click="navigateTo({name: 'register'})" flat dark>
           Sign Up
         </v-btn>
+      </v-toolbar-items>
+    <v-toolbar-items>
+      <v-badge v-if="$store.state.isUserLoggedIn" left>
+      <span slot="badge">6</span>
+      <v-icon
+        large
+        color="grey lighten-1"
+      >
+        shopping_cart
+      </v-icon>
+    </v-badge>
       </v-toolbar-items>
     <v-toolbar-items>
         <v-btn v-if="$store.state.isUserLoggedIn" @click="logout" flat dark>

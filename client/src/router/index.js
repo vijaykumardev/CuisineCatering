@@ -3,7 +3,10 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
-import Cuisine from '@/components/Cuisine'
+import Cuisine from '@/components/Cuisines/Index'
+import CreateCuisine from '@/components/CreateCuisine'
+import ViewCuisine from '@/components/ViewCuisine'
+import EditCuisine from '@/components/EditCuisine'
 
 Vue.use(Router)
 
@@ -25,9 +28,24 @@ export default new Router({
       component: Login
     },
     {
-      path: '/cuisine',
-      name: 'cuisine',
+      path: '/cuisines',
+      name: 'cuisines',
       component: Cuisine
+    },
+    {
+      path: '/cuisines/create',
+      name: 'cuisine-create',
+      component: CreateCuisine
+    },
+    {
+      path: '/cuisine/:cuisineId',
+      name: 'cuisine',
+      component: ViewCuisine
+    },
+    {
+      path: '/cuisine/:cuisineId/edit',
+      name: 'cuisine-edit',
+      component: EditCuisine
     }
   ]
 })
