@@ -1,6 +1,6 @@
 <template>
-<v-layout column>
-  <v-flex xs4 offset-xs4>
+<v-layout>
+  <v-flex xs8>
     <div class="white elevation-2">
       <v-toolbar flat dense class="deep-orange" dark>
         <v-toolbar-title>{{title}}</v-toolbar-title>

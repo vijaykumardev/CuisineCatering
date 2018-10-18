@@ -1,6 +1,9 @@
 <template>
-    <v-layout column>
-      <v-flex xs6 offset-xs3>
+    <v-layout>
+      <v-flex x6>
+        <cuisine-cart />
+      </v-flex>
+      <v-flex xs6 class="mt-2">
         <cuisine-search-panel />
         <cuisine-panel class="mt-2" />
       </v-flex>
@@ -9,22 +12,19 @@
 
 <script>
 import CuisinePanel from './CuisinePanel'
+import CuisineCart from './CuisineCart'
 import CuisineSearchPanel from './CuisineSearchPanel'
 import CuisineService from '@/services/CuisineService'
 export default {
   components: {
     CuisinePanel,
-    CuisineSearchPanel
+    CuisineSearchPanel,
+    CuisineCart
   },
   data () {
     return {
       cuisines: null,
       cuisineImageUrl: "https://upload.wikipedia.org/wikipedia/commons/3/30/Lucknowi's_Famous_Dum_Biryani.jpg"
-    }
-  },
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
     }
   },
   async mounted () {

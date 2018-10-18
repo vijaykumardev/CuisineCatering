@@ -1,6 +1,6 @@
 <template>
   <panel title="Cuisines">
-      <v-btn slot="action" @click="navigateTo({name: 'cuisine-create'})" class="deep-orange accent-2" light medium absolute right middle fab>
+      <v-btn slot="action" :to="{name: 'cuisine-create'}" class="deep-orange accent-2" light medium absolute right middle fab>
         <v-icon>add</v-icon>
       </v-btn>
     <div v-for="cuisine in cuisines" class="cuisine" :key="cuisine.id">
@@ -18,7 +18,7 @@
           <div class="cuisine-cost">
             {{cuisine.cost}}
           </div>
-          <v-btn dark class="deep-orange" @click="navigateTo({name: 'cuisine', params: {cuisineId: cuisine.id}})">
+          <v-btn dark class="deep-orange" :to="{name: 'cuisine', params: {cuisineId: cuisine.id}}">
             View
           </v-btn>
         </v-flex>
@@ -39,22 +39,13 @@ export default {
       cuisineImageUrl: "https://upload.wikipedia.org/wikipedia/commons/3/30/Lucknowi's_Famous_Dum_Biryani.jpg"
     }
   },
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
-    }
-  },
   watch: {
-    '$route.query.serach': {
+    '$route.query.search': {
       immediate: true,
       async handler (value) {
         this.cuisines = (await CuisineService.index(value)).data
       }
     }
-  },
-  async mounted () {
-    // request to backend for all cusinines
-    this.cuisines = (await CuisineService.index()).data
   }
 }
 </script>

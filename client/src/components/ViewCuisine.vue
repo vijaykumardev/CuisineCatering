@@ -15,8 +15,19 @@
           <div class="cuisine-cost">
             {{cuisine.cost}}
           </div>
-          <v-btn dark class="deep-orange" @click="navigateTo({name: 'cuisine-edit',params: {cuisineId: cuisine.id}})">
+          <v-btn dark class="deep-orange"
+            :to="{name: 'cuisine-edit',params(){ return {cuisineId: cuisine.id}}}">
             Edit
+          </v-btn>
+          <v-btn dark class="deep-orange"
+            v-if="isUserLoggedIn && !cart"
+            @click="addToCart">
+            Add to Cart
+          </v-btn>
+          <v-btn dark class="deep-orange"
+            v-if="isUserLoggedIn && cart"
+            @click="removeFromCart">
+            Remove from Cart
           </v-btn>
         </v-flex>
         <v-flex xs6>
@@ -30,23 +41,72 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import CuisineService from '@/services/CuisineService'
-
+import CartService from '@/services/CartService'
 export default {
   data () {
     return {
       cuisine: null,
-      cuisineImageUrl: null
+      cuisineImageUrl: null,
+      cart: null
     }
   },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'user'
+    ])
+  },
   methods: {
-    navigateTo (route) {
-      this.$router.push(route)
+    async addToCart () {
+      try {
+        this.cart = (await CartService.post({
+          cuisineId: this.cuisine.id,
+          userId: this.user.id
+        })).data
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async removeFromCart () {
+      try {
+        await CartService.delete(this.cart.cartId)
+        this.cart = null
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  },
+  watch: {
+    async cart () {
+      console.log('watch')
+      if (!this.isUserLoggedIn) {
+        return
+      }
+
+      try {
+        const carts = (await CartService.index({
+          cuisineId: this.cuisine.id,
+          userId: this.user.id
+        })).data
+        if (carts.length) {
+          this.cart = carts[0]
+        }
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
   async mounted () {
-    const cuisineId = this.$store.state.route.params.cuisineId
-    this.cuisine = (await CuisineService.show(cuisineId)).data
+    try {
+      const cuisineId = this.$store.state.route.params.cuisineId
+      this.cuisine = (await CuisineService.show(cuisineId)).data
+    } catch (e) {
+      console.log(e)
+    }
+    // await this.cart()
+    console.log('mounted')
   }
 }
 </script>

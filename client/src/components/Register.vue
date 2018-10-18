@@ -10,21 +10,21 @@
               <br>
               <v-text-field v-model="address" label="Address" ></v-text-field>
               <br>
-              <v-text-field v-model="phonenumber" label="Phone Number" ></v-text-field>
+              <v-text-field v-model="phone" label="Phone Number" ></v-text-field>
               <br>
               <v-text-field v-model="password" type="password" label="Password" autocomplete="new-password"></v-text-field>
               <br>
               <v-flex xs12 sm6 class="py-4" >
                 <v-btn-toggle v-model="usertype" mandatory class="deep-orange-lighten-4" center>
                   <v-btn flat>
-                    Customer
+                    CUSTOMER
                   </v-btn>
                   <v-btn flat>
-                    Caterer
+                    CATERER
                   </v-btn>
                 </v-btn-toggle>
               </v-flex>
-              <div class="error" v-html="error"/>
+              <div class="danger-alert" v-html="error"/>
               <br>
               <v-btn class="deep-orange" @click="register" dark>Register</v-btn>
             </form>
@@ -43,6 +43,8 @@ export default {
       firstname: '',
       lastname: '',
       usertype: '',
+      phone: '',
+      address: '',
       error: null
     }
   },
@@ -53,6 +55,9 @@ export default {
           email: this.email,
           password: this.password
         })
+        this.$router.push({
+          name: 'cuisines'
+        })
       } catch (error) {
         this.error = error.response.data.error
       }
@@ -62,8 +67,4 @@ export default {
 </script>
 
 <style scoped>
-.error {
-  color: red;
-}
-
 </style>

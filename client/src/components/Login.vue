@@ -7,7 +7,7 @@
               <br>
               <v-text-field v-model="password" type="password" label="Password"></v-text-field>
               <br>
-              <div class="error" v-html="error"/>
+              <div class="danger-alert" v-html="error"/>
               <br>
               <v-btn class="deep-orange" @click="login" dark>Login</v-btn>
             </form>
@@ -35,6 +35,9 @@ export default {
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.$router.push({
+          name: 'cuisines'
+        })
       } catch (error) {
         this.error = error.response.data.error
       }
@@ -44,8 +47,4 @@ export default {
 </script>
 
 <style scoped>
-.error {
-  color: red;
-}
-
 </style>

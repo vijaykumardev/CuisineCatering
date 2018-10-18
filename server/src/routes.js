@@ -1,5 +1,6 @@
 const AuthenticationController = require('./controllers/AuthenticationController')
 const CuisineController = require('./controllers/CuisineController')
+const CartController = require('./controllers/CartController')
 
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 module.exports = (app) => {
@@ -16,4 +17,11 @@ module.exports = (app) => {
      CuisineController.show)
   app.put('/cuisine/:cuisineId',
      CuisineController.put)
+
+  app.get('/cart',
+     CartController.index)
+  app.post('/cart',
+     CartController.post)
+  app.delete('/cart/:cartId',
+     CartController.delete)
 }
