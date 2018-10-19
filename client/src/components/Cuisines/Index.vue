@@ -2,6 +2,7 @@
     <v-layout>
       <v-flex x6>
         <cuisine-cart />
+        <recently-viewed-cuisines class="mt-2"/>
       </v-flex>
       <v-flex xs6 class="mt-2">
         <cuisine-search-panel />
@@ -14,12 +15,14 @@
 import CuisinePanel from './CuisinePanel'
 import CuisineCart from './CuisineCart'
 import CuisineSearchPanel from './CuisineSearchPanel'
+import RecentlyViewedCuisines from './RecentlyViewedCuisines'
 import CuisineService from '@/services/CuisineService'
 export default {
   components: {
     CuisinePanel,
     CuisineSearchPanel,
-    CuisineCart
+    CuisineCart,
+    RecentlyViewedCuisines
   },
   data () {
     return {

@@ -1,4 +1,7 @@
+const Sequelize = require('sequelize')
+
 const { Cuisine } = require('../models')
+const Op = Sequelize.Op
 module.exports = {
   async index (req, res) {
     try {
@@ -7,11 +10,11 @@ module.exports = {
       if (search) {
         cuisine = await Cuisine.findAll({
           where: {
-            $or: [
+            [Op.or]: [
               'name', 'cusine_type', 'meal_type'
             ].map(key => ({
               [key]: {
-                $like: `%${search}%`
+                [Op.like]: `%${search}%`
               }
             }))
           }

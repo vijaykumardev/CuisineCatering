@@ -80,7 +80,6 @@ export default {
   },
   watch: {
     async cart () {
-      console.log('watch')
       if (!this.isUserLoggedIn) {
         return
       }
