@@ -31,7 +31,7 @@
           </v-btn>
         </v-flex>
         <v-flex xs6>
-          <img class="cuisine-image" :src="cuisineImageUrl"/>
+          <img class="cuisine-image" :src="cuisine.image"/>
           <br>
           {{cuisine.name}}
         </v-flex>
@@ -48,7 +48,6 @@ export default {
   data () {
     return {
       cuisine: null,
-      cuisineImageUrl: null,
       cart: null
     }
   },
@@ -105,7 +104,6 @@ export default {
       console.log(e)
     }
     // await this.cart()
-    console.log('mounted')
   }
 }
 </script>

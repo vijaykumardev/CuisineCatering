@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
-
 const { Cuisine } = require('../models')
 const Op = Sequelize.Op
+
 module.exports = {
   async index (req, res) {
     try {
@@ -25,7 +25,7 @@ module.exports = {
       res.send(cuisine)
     } catch (err) {
       res.status(500).send({
-        error: 'an error has occured trying to fetch the cuisine'
+        error: err
       })
     }
   },

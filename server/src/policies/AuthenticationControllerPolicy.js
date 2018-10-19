@@ -8,11 +8,13 @@ module.exports = {
         new RegExp('^[a-zA-Z0-9]{8,32}$')
       ),
       phonenumber: Joi.number(),
-      firstname: Joi.string().length(1),
-      lastname: Joi.string()
+      firstname: Joi.string(),
+      lastname: Joi.string(),
+      usertype: Joi.string(),
+      address: Joi.string()
     }
     const { error } = Joi.validate(req.body, schema) /*, value */
-
+    console.log(req.body)
     if (error) {
       switch (error.details[0].context.key) {
         case 'email':

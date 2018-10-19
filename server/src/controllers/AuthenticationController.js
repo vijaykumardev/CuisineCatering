@@ -19,7 +19,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(400).send({
-        error: 'This email account is already in user.'
+        error: err
       })
     }
   },
@@ -50,7 +50,6 @@ module.exports = {
         token: jwtSignUser(userJson)
       })
     } catch (err) {
-      console.log(err)
       res.status(500).send({
         error: 'An error has occured trying to log in'
       })

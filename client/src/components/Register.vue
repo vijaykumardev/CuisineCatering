@@ -4,16 +4,11 @@
     <panel title="Register">
             <form name="tab-tracker-form">
               <v-text-field v-model="email" label="Email" ></v-text-field>
-              <br>
               <v-text-field v-model="firstname" label="First Name" ></v-text-field>
               <v-text-field v-model="lastname" label="Last Name" ></v-text-field>
-              <br>
               <v-text-field v-model="address" label="Address" ></v-text-field>
-              <br>
-              <v-text-field v-model="phone" label="Phone Number" ></v-text-field>
-              <br>
+              <v-text-field v-model="phonenumber" label="Phone Number" ></v-text-field>
               <v-text-field v-model="password" type="password" label="Password" autocomplete="new-password"></v-text-field>
-              <br>
               <v-flex xs12 sm6 class="py-4" >
                 <v-btn-toggle v-model="usertype" mandatory class="deep-orange-lighten-4" center>
                   <v-btn flat>
@@ -43,7 +38,7 @@ export default {
       firstname: '',
       lastname: '',
       usertype: '',
-      phone: '',
+      phonenumber: '',
       address: '',
       error: null
     }
@@ -53,7 +48,12 @@ export default {
       try {
         await AuthenticationService.register({
           email: this.email,
-          password: this.password
+          password: this.password,
+          firstname: this.firstname,
+          lastname: this.lastname,
+          usertype: (this.usertype===0?'CUSTOMER':'CATERER'),
+          phonenumber: this.phonenumber,
+          address: this.address
         })
         this.$router.push({
           name: 'cuisines'
