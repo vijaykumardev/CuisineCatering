@@ -14,7 +14,6 @@ module.exports = {
       address: Joi.string()
     }
     const { error } = Joi.validate(req.body, schema) /*, value */
-    console.log(req.body)
     if (error) {
       switch (error.details[0].context.key) {
         case 'email':

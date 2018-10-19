@@ -51,7 +51,7 @@ export default {
           password: this.password,
           firstname: this.firstname,
           lastname: this.lastname,
-          usertype: (this.usertype===0?'CUSTOMER':'CATERER'),
+          usertype: (this.usertype === 0 ? 'CUSTOMER' : 'CATERER'),
           phonenumber: this.phonenumber,
           address: this.address
         })

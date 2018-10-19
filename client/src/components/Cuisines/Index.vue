@@ -1,10 +1,13 @@
 <template>
     <v-layout>
-      <v-flex x6>
+      <v-flex x6 v-if="isUserLoggedIn">
         <cuisine-cart />
         <recently-viewed-cuisines class="mt-2"/>
       </v-flex>
-      <v-flex xs6 class="mt-2">
+      <v-flex :class="{
+        xs12: !isUserLoggedIn,
+        xs6: isUserLoggedIn
+        }" class="ml-2">
         <cuisine-search-panel />
         <cuisine-panel class="mt-2" />
       </v-flex>
@@ -17,12 +20,19 @@ import CuisineCart from './CuisineCart'
 import CuisineSearchPanel from './CuisineSearchPanel'
 import RecentlyViewedCuisines from './RecentlyViewedCuisines'
 import CuisineService from '@/services/CuisineService'
+import {mapState} from 'vuex'
+
 export default {
   components: {
     CuisinePanel,
     CuisineSearchPanel,
     CuisineCart,
     RecentlyViewedCuisines
+  },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn'
+    ])
   },
   data () {
     return {

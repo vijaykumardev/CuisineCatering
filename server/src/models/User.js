@@ -12,7 +12,7 @@ function hashPassword (user, options) {
     .genSaltAsync(SALT_FACTOR)
     .then(salt => bcrypt.hashAsync(user.password, salt, null))
     .then(hash => {
-      user.setDataValue('password', user.password) // for encryption change this to hash
+      user.setDataValue('password', user.password) // hash)
     })
 }
 
@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   User.prototype.comparePassword = function (password) {
-    return password === this.password
+    return this.password === password
     // return bcrypt.compareAsync(password, this.password)
   }
 

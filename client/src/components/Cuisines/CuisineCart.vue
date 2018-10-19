@@ -45,9 +45,7 @@ export default {
   },
   async mounted () {
     if (this.isUserLoggedIn) {
-      this.carts = (await CartService.index({
-        userId: this.user.id
-      })).data
+      this.carts = (await CartService.index()).data
     }
   }
 }

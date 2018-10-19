@@ -44,6 +44,8 @@
 import {mapState} from 'vuex'
 import CuisineService from '@/services/CuisineService'
 import CartService from '@/services/CartService'
+import CuisineHistoryService from '@/services/CuisineHistoryService'
+
 export default {
   data () {
     return {
@@ -54,7 +56,8 @@ export default {
   computed: {
     ...mapState([
       'isUserLoggedIn',
-      'user'
+      'user',
+      'route'
     ])
   },
   methods: {
@@ -85,8 +88,7 @@ export default {
 
       try {
         const carts = (await CartService.index({
-          cuisineId: this.cuisine.id,
-          userId: this.user.id
+          cuisineId: this.cuisine.id
         })).data
         if (carts.length) {
           this.cart = carts[0]
@@ -98,8 +100,14 @@ export default {
   },
   async mounted () {
     try {
-      const cuisineId = this.$store.state.route.params.cuisineId
+      const cuisineId = this.route.params.cuisineId
       this.cuisine = (await CuisineService.show(cuisineId)).data
+
+      if (this.isUserLoggedIn) {
+        CuisineHistoryService.post({
+          cuisineId: cuisineId
+        })
+      }
     } catch (e) {
       console.log(e)
     }

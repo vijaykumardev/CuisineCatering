@@ -1,0 +1,10 @@
+[
+  {
+    "CuisineId": 1,
+    "UserId": 1
+  },
+  {
+    "CuisineId": 2,
+    "UserId": 1
+  }
+]

@@ -1,7 +1,7 @@
 <template>
   <panel title="Recently Viewed Cuisine">
     <v-data-table :headers="headers" :pagination.sync="pagination"
-      :items="cuisines">
+      :items="histories">
       <template slot="items" scope="props">
         <td class="text-xs-right">
           {{props.item.name}}
@@ -34,7 +34,7 @@ export default {
         sortBy: 'createdAt',
         descending: true
       },
-      cuisines: []
+      histories: []
     }
   },
   computed: {
@@ -45,9 +45,7 @@ export default {
   },
   async mounted () {
     if (this.isUserLoggedIn) {
-      this.cuisines = (await CuisineHistoryService.index({
-        userId: this.user.id
-      })).data
+      this.histories = (await CuisineHistoryService.index()).data
     }
   }
 }

@@ -19,7 +19,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(400).send({
-        error: err
+        error: 'This email account is already in use.'
       })
     }
   },
@@ -31,16 +31,17 @@ module.exports = {
           email: email
         }
       })
+      console.log(user)
       if (!user) {
         return res.status(403).send({
-          error: 'User: The login information was incorrect'
+          error: 'The login information was incorrect'
         })
       }
-
       const isPasswordValid = await user.comparePassword(password)
+      console.log(isPasswordValid)
       if (!isPasswordValid) {
         return res.status(403).send({
-          error: 'Pass: The login information was incorrect'
+          error: 'The login information was incorrect'
         })
       }
 
@@ -50,6 +51,7 @@ module.exports = {
         token: jwtSignUser(userJson)
       })
     } catch (err) {
+      console.log(err)
       res.status(500).send({
         error: 'An error has occured trying to log in'
       })

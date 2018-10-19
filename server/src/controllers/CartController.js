@@ -4,7 +4,8 @@ const _ = require('lodash')
 module.exports = {
   async index (req, res) {
     try {
-      const { cuisineId, userId } = req.query
+      const userId = req.user.id
+      const { cuisineId } = req.query
       let where = {
         UserId: userId
       }
@@ -34,7 +35,8 @@ module.exports = {
   },
   async post (req, res) {
     try {
-      const { cuisineId, userId } = req.body
+      const userId = req.user.id
+      const { cuisineId } = req.body
       const cart = await Cart.findOne({
         where: {
           CuisineId: cuisineId,
@@ -60,8 +62,19 @@ module.exports = {
   },
   async delete (req, res) {
     try {
+      const userId = req.user.id
       const { cartId } = req.params
-      const cart = await Cart.findById(cartId)
+      const cart = await Cart.findByOne({
+        where: {
+          id: cartId,
+          userId: userId
+        }
+      })
+      if (!cart) {
+        return res.status(403).send({
+          error: 'you do not have access to this cart details'
+        })
+      }
       await cart.destroy()
       res.send(cart)
       res.send(cart)
