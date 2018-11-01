@@ -26,6 +26,7 @@ module.exports = {
           cart.Cuisine,
           cart
         ))
+      console.log(carts)
       res.send(carts)
     } catch (err) {
       res.status(500).send({
@@ -36,7 +37,7 @@ module.exports = {
   async post (req, res) {
     try {
       const userId = req.user.id
-      const { cuisineId } = req.body
+      const { cuisineId, quantity } = req.body
       const cart = await Cart.findOne({
         where: {
           CuisineId: cuisineId,
@@ -51,7 +52,8 @@ module.exports = {
 
       const newCart = await Cart.create({
         CuisineId: cuisineId,
-        UserId: userId
+        UserId: userId,
+        Quantity: quantity
       })
       res.send(newCart)
     } catch (err) {
@@ -64,12 +66,15 @@ module.exports = {
     try {
       const userId = req.user.id
       const { cartId } = req.params
-      const cart = await Cart.findByOne({
+      console.log(userId)
+      console.log(cartId)
+      const cart = await Cart.findOne({
         where: {
           id: cartId,
           userId: userId
         }
       })
+      console.log(cart)
       if (!cart) {
         return res.status(403).send({
           error: 'you do not have access to this cart details'
@@ -77,8 +82,8 @@ module.exports = {
       }
       await cart.destroy()
       res.send(cart)
-      res.send(cart)
     } catch (err) {
+      console.log(err)
       res.status(500).send({
         error: 'an error has occured trying to delete the cart'
       })

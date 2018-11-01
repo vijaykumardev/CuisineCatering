@@ -25,8 +25,8 @@
         </v-btn>
       </v-toolbar-items>
     <v-toolbar-items>
-      <v-badge v-if="$store.state.isUserLoggedIn" left>
-      <span slot="badge">6</span>
+      <v-badge v-if="$store.state.isUserLoggedIn" class="home" :to="{name: 'shopping-cart'}" left>
+      <span slot="badge">0</span>
       <v-icon
         large
         color="grey lighten-1"

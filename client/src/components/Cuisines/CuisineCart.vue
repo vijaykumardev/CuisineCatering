@@ -2,7 +2,7 @@
   <panel title="Shopping Cart">
     <v-data-table :headers="headers" :pagination.sync="pagination"
       :items="carts">
-      <template slot="items" scope="props">
+      <template slot="items" slot-scope="props">
         <td class="text-xs-right">
           {{props.item.name}}
         </td>

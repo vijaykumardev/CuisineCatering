@@ -1,6 +1,6 @@
 <template>
   <panel title="Cuisines">
-      <v-btn slot="action" :to="{name: 'cuisine-create'}" class="deep-orange accent-2" light medium absolute right middle fab>
+      <v-btn slot="action" v-if="isUserLoggedIn && user.usertype==='CATERER'" :to="{name: 'cuisine-create'}" class="deep-orange accent-2" light medium absolute right middle fab>
         <v-icon>add</v-icon>
       </v-btn>
     <div v-for="cuisine in cuisines" class="cuisine" :key="cuisine.id">
@@ -23,7 +23,7 @@
           </v-btn>
         </v-flex>
         <v-flex xs6>
-          <img class="cuisine-image" :src="cuisineImageUrl"/>
+          <img class="cuisine-image" :src="cuisine.image"/>
         </v-flex>
       </v-layout>
     </div>
@@ -32,12 +32,18 @@
 
 <script>
 import CuisineService from '@/services/CuisineService'
+import {mapState} from 'vuex'
 export default {
   data () {
     return {
-      cuisines: null,
-      cuisineImageUrl: "https://upload.wikipedia.org/wikipedia/commons/3/30/Lucknowi's_Famous_Dum_Biryani.jpg"
+      cuisines: null
     }
+  },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'user'
+    ])
   },
   watch: {
     '$route.query.search': {

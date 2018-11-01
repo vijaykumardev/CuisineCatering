@@ -1,6 +1,7 @@
 [
   {
     "CuisineId": 1,
-    "UserId": 1
+    "UserId": 1,
+    "Quantity": 1
   }
 ]

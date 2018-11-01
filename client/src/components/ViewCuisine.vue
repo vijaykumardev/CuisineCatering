@@ -13,19 +13,22 @@
             {{cuisine.cusine_type}}
           </div>
           <div class="cuisine-cost">
-            {{cuisine.cost}}
+            {{cuisine.cost*this.selectedQty}}
           </div>
+          <v-select :items="qty" v-model="selectedQty" label="Quantity">
+          </v-select>
           <v-btn dark class="deep-orange"
+            v-if="isUserLoggedIn && user.usertype==='CATERER'"
             :to="{name: 'cuisine-edit',params(){ return {cuisineId: cuisine.id}}}">
             Edit
           </v-btn>
           <v-btn dark class="deep-orange"
-            v-if="isUserLoggedIn && !cart"
+            v-if="isUserLoggedIn && !cart && user.usertype==='CUSTOMER'"
             @click="addToCart">
             Add to Cart
           </v-btn>
           <v-btn dark class="deep-orange"
-            v-if="isUserLoggedIn && cart"
+            v-if="isUserLoggedIn && cart && user.usertype==='CUSTOMER'"
             @click="removeFromCart">
             Remove from Cart
           </v-btn>
@@ -50,7 +53,9 @@ export default {
   data () {
     return {
       cuisine: null,
-      cart: null
+      cart: null,
+      qty: [1, 2, 3, 4, 5, 6, 7, 8],
+      selectedQty: 1
     }
   },
   computed: {
@@ -65,27 +70,23 @@ export default {
       try {
         this.cart = (await CartService.post({
           cuisineId: this.cuisine.id,
-          userId: this.user.id
+          userId: this.user.id,
+          quantity: this.selectedQty
         })).data
+        this.fetchFromCart()
       } catch (err) {
         console.log(err)
       }
     },
     async removeFromCart () {
       try {
-        await CartService.delete(this.cart.cartId)
+        await CartService.delete(this.cart.id)
         this.cart = null
       } catch (err) {
         console.log(err)
       }
-    }
-  },
-  watch: {
-    async cart () {
-      if (!this.isUserLoggedIn) {
-        return
-      }
-
+    },
+    async fetchFromCart () {
       try {
         const carts = (await CartService.index({
           cuisineId: this.cuisine.id
@@ -98,6 +99,15 @@ export default {
       }
     }
   },
+  watch: {
+    // async cart () {
+    //   if (!this.isUserLoggedIn) {
+    //     return
+    //   }
+    //
+    //
+    // }
+  },
   async mounted () {
     try {
       const cuisineId = this.route.params.cuisineId
@@ -107,6 +117,7 @@ export default {
         CuisineHistoryService.post({
           cuisineId: cuisineId
         })
+        this.fetchFromCart()
       }
     } catch (e) {
       console.log(e)
@@ -137,5 +148,10 @@ export default {
 .cuisine-image {
   width: 70%;
   margin: 0 auto;
+}
+.qty {
+  display: block;
+  margin: 0 auto;
+  font-size: 18px;
 }
 </style>
