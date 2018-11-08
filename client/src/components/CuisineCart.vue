@@ -16,6 +16,9 @@
             </td>
           </template>
         </v-data-table>
+        <v-btn dark class="deep-orange" @click="putShoppingCart">
+            Submit
+        </v-btn>
       </panel>
     </v-flex>
   </v-layout>
@@ -45,8 +48,7 @@ export default {
         sortBy: 'createdAt',
         descending: true
       },
-      carts: [],
-      sCart: []
+      carts: []
     }
   },
   computed: {
@@ -59,12 +61,23 @@ export default {
   async mounted () {
     if (this.isUserLoggedIn) {
       this.carts = (await CartService.index()).data
-      console.log(this.carts)
-      await sCart.forEach((value, key, map) => {
-        this.carts.push(value)
-      })
+      // await sCart.forEach((value, key, map) => {
+      //   this.carts.push(value)
+      // })
       // this.carts = (await CartService.index()).data
-      this.ccart = this.carts.length
+      // this.ccart = this.carts.length
+    }
+  },
+  methods: {
+    async putShoppingCart () {
+      try {
+        await CartService.put('ordered')
+        this.$router.push({
+          name: 'shopping-cart'
+        })
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }

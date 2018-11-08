@@ -11,5 +11,8 @@ export default {
   },
   delete (cartId) {
     return Api().delete(`cart/${cartId}`)
+  },
+  put (status) {
+    return Api().put(`cart/${status}`, status)
   }
 }

@@ -3,6 +3,7 @@
       "name":"American Chinese cuisine",
       "meal_type":"breakfast",
       "cusine_type":"american",
+      "image":"../../static/images/amechicuisine.jpg",
       "cost":5.99
    },
    {

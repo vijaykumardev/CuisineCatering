@@ -26,6 +26,9 @@ module.exports = (app) => {
   app.post('/cart',
      isAuthenticated,
      CartController.post)
+  app.put('/cart/:Status',
+     isAuthenticated,
+     CartController.put)
   app.delete('/cart/:cartId',
      isAuthenticated,
      CartController.delete)

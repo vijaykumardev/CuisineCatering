@@ -1,7 +1,7 @@
 <template>
     <v-layout>
       <v-flex x6 v-if="isUserLoggedIn">
-        <cuisine-cart />
+        <!-- <cuisine-cart /> -->
         <recently-viewed-cuisines class="mt-2"/>
       </v-flex>
       <v-flex :class="{

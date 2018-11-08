@@ -25,15 +25,15 @@
         </v-btn>
       </v-toolbar-items>
     <v-toolbar-items>
-      <v-badge v-if="$store.state.isUserLoggedIn" class="home" :to="{name: 'shopping-cart'}" left>
-      <span slot="badge">0</span>
+      <v-btn v-if="$store.state.isUserLoggedIn" class="home" @click="shoppingCart" left flat dark>
+      <!-- <span slot="badge">0</span> -->
       <v-icon
         large
         color="grey lighten-1"
       >
         shopping_cart
       </v-icon>
-    </v-badge>
+    </v-btn>
       </v-toolbar-items>
     <v-toolbar-items>
         <v-btn v-if="$store.state.isUserLoggedIn" @click="logout" flat dark>
@@ -51,6 +51,11 @@ export default {
       this.$store.dispatch('setUser', null)
       this.$router.push({
         name: 'cuisines'
+      })
+    },
+    async shoppingCart () {
+      this.$router.push({
+        name: 'shopping-cart'
       })
     }
   }
