@@ -10,30 +10,35 @@
       "name":"Biscuit (and Biscuits and gravy)",
       "meal_type":"breakfast",
       "cusine_type":"american",
+      "image":"../../static/images/biscuitgravy.jpg",
       "cost":5.99
    },
    {
       "name":"Bread",
       "meal_type":"breakfast",
       "cusine_type":"american",
+      "image":"../../static/images/bread.jpg",
       "cost":5.98
    },
    {
       "name":"Ammonia cookie",
       "meal_type":"breakfast",
       "cusine_type":"american",
+      "image":"../../static/images/ammoniacookie.jpg",
       "cost":5.99
    },
    {
       "name":"Cuisine of Antebellum America",
       "meal_type":"breakfast",
       "cusine_type":"american",
+      "image":"../../static/images/antebellum.jpg",
       "cost":5.99
    },
    {
       "name":"Apple butter",
       "meal_type":"breakfast",
       "cusine_type":"american",
+      "image":"../../static/images/applebutter.jpg",
       "cost":5.99
    },
    {

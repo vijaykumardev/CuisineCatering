@@ -6,8 +6,10 @@ module.exports = {
     try {
       const userId = req.user.id
       const { cuisineId } = req.query
-      let where = {
-        UserId: userId
+      const { usertype } = req.query
+      let where = {}
+      if (usertype === 'CUSTOMER') {
+        where.UserId = userId
       }
       if (cuisineId) {
         where.CuisineId = cuisineId
@@ -90,13 +92,16 @@ module.exports = {
   async put (req, res) {
     try {
       const userId = req.user.id
+      const userType = req.user.usertype
       const { Status } = req.params
-      console.log(Status)
-      // console.log(req)
-      const cart = await Cart.update({ Status: Status }, {
-        where: {
+      let where = {}
+      if (userType === 'CUSTOMER') {
+        where = {
           userId: userId
         }
+      }
+      const cart = await Cart.update({ Status: Status }, {
+        where: where
       })
       console.log(cart)
       if (!cart) {

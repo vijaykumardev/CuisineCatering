@@ -1,3 +1,4 @@
+
 <template>
   <v-layout>
     <panel title="Cuisine Metadata">
@@ -15,7 +16,8 @@
           <div class="cuisine-cost">
             {{cuisine.cost*this.selectedQty}}
           </div>
-          <v-select :items="qty" v-model="selectedQty" label="Quantity">
+          <v-select :items="qty" v-model="selectedQty" label="Quantity"
+          v-if="isUserLoggedIn && !cart && user.usertype==='CUSTOMER'">
           </v-select>
           <v-btn dark class="deep-orange"
             v-if="isUserLoggedIn && user.usertype==='CATERER'"
@@ -89,7 +91,8 @@ export default {
     async fetchFromCart () {
       try {
         const carts = (await CartService.index({
-          cuisineId: this.cuisine.id
+          cuisineId: this.cuisine.id,
+          usertype: this.user.usertype
         })).data
         if (carts.length) {
           this.cart = carts[0]
